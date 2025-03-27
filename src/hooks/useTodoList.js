@@ -22,6 +22,15 @@ export function useTodoList() {
         });
     }, []);
 
+    const show = useCallback(
+        (id) => {
+            editId.current = id;
+            const found = todoList.find((todo) => todo.id === id);
+            return found ? found.task : "";
+        },
+        [todoList]
+    );
+
     const del = useCallback((id) => {
         setTodoList((prev) => {
             const found = prev.find((todo) => todo.id === id);
@@ -36,5 +45,5 @@ export function useTodoList() {
         });
     }, []);
 
-    return { todoList, add, del };
+    return { todoList, add, show, del };
 }
