@@ -22,5 +22,19 @@ export function useTodoList() {
         });
     }, []);
 
-    return { todoList, add };
+    const del = useCallback((id) => {
+        setTodoList((prev) => {
+            const found = prev.find((todo) => todo.id === id);
+            if (!found) return prev;
+
+            if (!window.confirm(`「${found.task}」を削除しますか`)) {
+                return prev;
+            }
+            const updated = prev.filter((todo) => todo.id !== id);
+            saveToLocalStorage(updated);
+            return updated;
+        });
+    }, []);
+
+    return { todoList, add, del };
 }

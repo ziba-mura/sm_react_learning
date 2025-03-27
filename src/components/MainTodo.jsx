@@ -4,12 +4,16 @@ import { useTodoList } from "../hooks/useTodoList";
 export default function MainTodo() {
     const [todo, setTodo] = useState("");
 
-    const { todoList, add } = useTodoList();
+    const { todoList, add, del } = useTodoList();
 
     const addTodo = () => {
         if (!todo) return;
         add(todo);
         setTodo("");
+    };
+
+    const deleteTodo = (id) => {
+        del(id);
     };
 
     return (
@@ -29,7 +33,9 @@ export default function MainTodo() {
                         </div>
                         <div className="btns">
                             <div className="btn green">編</div>
-                            <div className="btn pink">削</div>
+                            <div className="btn pink" onClick={() => deleteTodo(item.id)}>
+                                削
+                            </div>
                         </div>
                     </div>
                 ))}
