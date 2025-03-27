@@ -3,8 +3,9 @@ import { useTodoList } from "../hooks/useTodoList";
 
 export default function MainTodo() {
     const [todo, setTodo] = useState("");
+    const [isEdit, setIsEdit] = useState(false);
 
-    const { todoList, add, show, del } = useTodoList();
+    const { todoList, add, show, edit, del } = useTodoList();
 
     const addTodo = () => {
         if (!todo) return;
@@ -16,10 +17,19 @@ export default function MainTodo() {
         const currentTask = show(id);
         if (currentTask) {
             setTodo(currentTask);
+            setIsEdit(true);
         }
     };
 
+    const editTodo = () => {
+        if (!todo) return;
+        edit(todo);
+        setIsEdit(false);
+        setTodo("");
+    };
+
     const deleteTodo = (id) => {
+        setIsEdit(false);
         del(id);
     };
 
@@ -27,9 +37,15 @@ export default function MainTodo() {
         <div>
             <div>
                 <input type="text" className="todo_input" placeholder="+ TODOを入力" value={todo} onChange={(e) => setTodo(e.target.value)} />
-                <button className="btn" onClick={addTodo}>
-                    追加
-                </button>
+                {isEdit ? (
+                    <button className="btn green" onClick={editTodo}>
+                        変更
+                    </button>
+                ) : (
+                    <button className="btn" onClick={addTodo}>
+                        追加
+                    </button>
+                )}
             </div>
 
             <div className="box_list">
