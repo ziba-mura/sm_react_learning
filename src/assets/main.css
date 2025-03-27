@@ -40,6 +40,33 @@
     top: 1px;
 }
 
+.box_list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 20px;
+}
+.todo_list {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+.todo {
+    width: 250px;
+    padding: 6px 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+.btns {
+    display: flex;
+    gap: 4px;
+}
+.green {
+    background-color: #00c853;
+}
+.pink {
+    background-color: #ff4081;
+}
 .footer {
     width: 100%;
     height: 30px;
