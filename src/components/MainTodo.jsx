@@ -1,23 +1,14 @@
 import React, { useState } from "react";
+import { useTodoList } from "../hooks/useTodoList";
 
 export default function MainTodo() {
     const [todo, setTodo] = useState("");
 
-    const [todoList, setTodoList] = useState(() => {
-        const ls = localStorage.getItem("todoList");
-        return ls ? JSON.parse(ls) : [];
-    });
+    const { todoList, add } = useTodoList();
 
     const addTodo = () => {
         if (!todo) return;
-        const newTodo = {
-            id: Date.now(),
-            task: todo,
-        };
-        setTodoList((prev) => {
-            const updated = [...prev, newTodo];
-            return updated;
-        });
+        add(todo);
         setTodo("");
     };
 
