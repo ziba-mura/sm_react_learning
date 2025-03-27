@@ -1,6 +1,6 @@
 import React from 'react';
 import TheHeader from './components/TheHeader';
-// import MainTodo from './components/MainTodo';
+import MainTodo from './components/MainTodo';
 import TheFooter from './components/TheFooter';
 
 export const App = () => {
@@ -8,7 +8,7 @@ export const App = () => {
     <div className="wrap">
       <TheHeader />
       <main className="main">
-        {/* <MainTodo /> */}
+        <MainTodo />
       </main>
       <TheFooter />
     </div>
