@@ -15,6 +15,7 @@ export function useTodoList() {
         const newTodo = {
             id: Date.now(),
             task,
+            checked: false,
         };
         setTodoList((prev) => {
             const updated = [...prev, newTodo];
@@ -60,5 +61,17 @@ export function useTodoList() {
         });
     }, []);
 
-    return { todoList, add, show, edit, del };
+    const check = useCallback((id) => {
+        setTodoList((prev) => {
+            const idx = prev.findIndex((todo) => todo.id === id);
+            if (idx < 0) return prev;
+
+            const updated = [...prev];
+            updated[idx] = { ...updated[idx], checked: !updated[idx].checked };
+            saveToLocalStorage(updated);
+            return updated;
+        });
+    }, []);
+
+    return { todoList, add, show, edit, del, check };
 }

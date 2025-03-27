@@ -5,7 +5,7 @@ export default function MainTodo() {
     const [todo, setTodo] = useState("");
     const [isEdit, setIsEdit] = useState(false);
 
-    const { todoList, add, show, edit, del } = useTodoList();
+    const { todoList, add, show, edit, del, check } = useTodoList();
 
     const addTodo = () => {
         if (!todo) return;
@@ -33,6 +33,10 @@ export default function MainTodo() {
         del(id);
     };
 
+    const changeCheck = (id) => {
+        check(id);
+    };
+
     return (
         <div>
             <div>
@@ -51,7 +55,8 @@ export default function MainTodo() {
             <div className="box_list">
                 {todoList.map((item) => (
                     <div className="todo_list" key={item.id}>
-                        <div className={`todo`}>
+                        <div className={`todo ${item.checked ? "fin" : ""}`}>
+                            <input type="checkbox" className="check" checked={item.checked} onChange={() => changeCheck(item.id)} />
                             <label>{item.task}</label>
                         </div>
                         <div className="btns">
